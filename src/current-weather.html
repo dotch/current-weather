@@ -1,0 +1,130 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="stylesheet" href="../bower_components/weather-icons/css/weather-icons.css">
+
+<polymer-element name="current-weather"  attributes="lat lon units">
+  <template>
+    <style>
+      :host {
+        text-align: center;
+        font-size: 1em;
+      }
+      .weather {
+        width: 100%;
+        height: 100%;
+      }
+      .location {
+        margin-bottom: 1em;
+      }
+      .location > span {
+        font-size: 1.5em;
+      }
+      .weather-icon {
+        margin-bottom: 1em;
+      }
+      .weather-icon > i {
+        font-size: 5em;
+      }
+      .temperatures {
+        margin-bottom: 1em;
+      }
+      .current {
+        font-size: 4em;
+      }
+      .max {
+        margin-left: 1em;
+      }
+      .wind {
+        margin-bottom: 1em;
+      }
+    </style>
+    <core-ajax id="ajax" auto
+      url="http://api.openweathermap.org/data/2.5/weather"
+      params='{
+        "lat": {{lat}},
+        "lon": {{lon}},
+        "units": "{{units}}" 
+      }'
+      handleAs="json"
+    > 
+    </core-ajax>
+    <template if="{{data}}">
+      <div class="weather">
+        <div class="location">
+          <span>{{data.name}}</span>
+        </div>   
+        <div class="weather-icon">
+          <i class="{{data.icon}}"></i>
+        </div>
+        <div class="temperatures">
+          <div class="current">{{data.currentTemp}}°</div>
+          <div class="minmax">
+            <span class="min">
+              <i class="wi-up"></i> {{data.maxTemp}}° 
+            </span>
+            <span class="max">
+              <i class="wi-down"></i> {{data.minTemp}}°
+            </span> 
+          </div>
+        </div>
+        <div class="wind">
+          <i class="wi-strong-wind"></i> {{data.wind}} {{speedUnit}}<br>   
+        </div>
+        <div class="sun">
+          <i class="wi-sunrise"></i> {{data.sunrise}} <br>
+          <i class="wi-sunset"></i> {{data.sunset}} <br>
+        </div>
+      </div>      
+    </template>
+  </template>
+  <script>
+    Polymer('current-weather', {
+      units: "metric",
+      temperatureUnit:  "C",
+      speedUnit: "km/h",
+      iconMapping: {
+        "01d": "wi-day-sunny",
+        "01n": "wi-night-clear",
+        "02d": "wi-day-cloudy",
+        "02n": "wi-night-cloudy",
+        "03d": "wi-cloudy",
+        "03n": "wi-cloudy",
+        "04d": "wi-cloudy",
+        "04n": "wi-cloudy",
+        "09d": "wi-showers",
+        "09n": "wi-showers",
+        "10d": "wi-day-rain",
+        "10n": "wi-night-rain",
+        "11d": "wi-thunderstorm",
+        "11n": "wi-thunderstorm",
+        "13d": "wi-snow",
+        "13n": "wi-snow",
+        "50d": "wi-fog",
+        "50n": "wi-fog"
+      },
+      data: null,
+      ready: function() {
+        console.log(this.data);
+        if (this.units === "imperial") {
+          this.temperatureUnit = "F";
+          this.speedUnit = "mp/h";
+        };
+        this.$.ajax.addEventListener('core-response', function(e){
+          var res = e.detail.response;
+          var sunrise = new Date(res.sys.sunrise*1000);
+          var sunset = new Date(res.sys.sunset*1000);
+          this.data = {
+            icon: this.iconMapping[res.weather[0].icon],
+            name: res.name,
+            sunrise: sunrise.getHours() + ":" + sunrise.getMinutes(),
+            sunset: sunset.getHours() + ":" + sunset.getMinutes(),
+            currentTemp: Math.round(res.main.temp),
+            minTemp: res.main.temp_min,
+            maxTemp: res.main.temp_max,
+            wind: res.wind.speed
+          }
+        }.bind(this));
+      }
+    });
+  </script>
+</polymer-element>
