@@ -1,6 +1,6 @@
 {
     "name": "current-weather",
-    "version": "0.0.1",
+    "version": "0.2.0",
     "description": "A polymer element for showing the current weather",
     "license": "MIT",
     "main": "dist/current-weather.html",
