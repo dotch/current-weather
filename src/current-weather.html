@@ -119,8 +119,8 @@
             sunrise: sunrise.getHours() + ":" + sunrise.getMinutes(),
             sunset: sunset.getHours() + ":" + sunset.getMinutes(),
             currentTemp: Math.round(res.main.temp),
-            minTemp: res.main.temp_min,
-            maxTemp: res.main.temp_max,
+            minTemp: Math.round(res.main.temp_min),
+            maxTemp: Math.round(res.main.temp_max),
             wind: res.wind.speed
           }
         }.bind(this));
