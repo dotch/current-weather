@@ -19,9 +19,11 @@
     </core-ajax>
     <template if="{{data}}">
       <div class="weather">
-        <div class="info">
-          {{data.name}}
-        </div>
+        <template>
+          <div class="info">
+            {{data.name}}
+          </div>
+        </template>
         <div class="weather-icon">
           <i class="{{data.icon}}"></i>
         </div>
