@@ -31,10 +31,10 @@
           </div>
           <div class="minmax">
             <div class="min">
-              <i class="wi-up"></i> {{data.minTemp}}° 
+              <i class="wi-down"></i> {{data.minTemp}}° 
             </div>
             <div class="max">
-              <i class="wi-down"></i> {{data.maxTemp}}°
+              <i class="wi-up"></i> {{data.maxTemp}}°
             </div> 
           </div>
         </div>
@@ -115,6 +115,7 @@
             humidity: res.main.humidity,
             pressure: res.main.pressure
           }
+          this.fire('current-weather-load', {weather: data});
         }.bind(this));
       }
     });

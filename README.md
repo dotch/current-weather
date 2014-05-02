@@ -46,6 +46,11 @@ Attribute     | Options     | Default      | Description
 `long`        | *double*    | ``           | The longitude of the desired location 
 `units`       | *string*    | `metric'     | 'metric' or 'imperial' units
 
+## Events
+
+Event                    | Description
+---                      | ---
+`current-weather-loaded` | Triggers when weather data is loaded
 
 ## Development
 
