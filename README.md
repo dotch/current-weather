@@ -42,9 +42,14 @@ Or [download as ZIP](https://github.com/dotch/current-weather/archive/master.zip
 
 Attribute     | Options     | Default      | Description
 ---           | ---         | ---          | ---
-`lat`         | *double*    | ``           | The latitude of the desired location 
-`long`        | *double*    | ``           | The longitude of the desired location 
-`units`       | *string*    | `metric'     | 'metric' or 'imperial' units
+`lat`         | *double*    | ``           | The latitude of the desired location
+`long`        | *double*    | ``           | The longitude of the desired location
+`imperial`    | *boolean*   | `false'      | use imperial instead of metric units
+`wind`        | *boolean*   | `false'      | show wind information
+`suntimes`    | *boolean*   | `false'      | show sunrise und sunset times
+`hump`        | *boolean*   | `false'      | show humidity and pressure
+
+
 
 ## Events
 
