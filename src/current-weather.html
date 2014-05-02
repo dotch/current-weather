@@ -2,7 +2,7 @@
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 <link rel="stylesheet" href="../bower_components/weather-icons/css/weather-icons.css">
 
-<polymer-element name="current-weather"  attributes="lat lon imperial wind suntimes hump">
+<polymer-element name="current-weather"  attributes="lat lon name imperial wind suntimes hump">
   <template>
     <style>
 
@@ -18,10 +18,12 @@
     >
     </core-ajax>
     <template if="{{data}}">
-      <div class="weather">
-        <div class="info">
-          {{data.name}}
-        </div>
+      <div class="weather temp-level-{{data.tempLevel}}">
+        <template if="{{name}}">
+          <div class="info">
+            {{data.name}}
+          </div>
+        </template>
         <div class="weather-icon">
           <i class="{{data.icon}}"></i>
         </div>
@@ -73,6 +75,7 @@
   </template>
   <script>
     Polymer('current-weather', {
+      name: false,
       imperial: false,
       wind: false,
       suntimes: false,
@@ -113,18 +116,29 @@
           var res = e.detail.response;
           var sunrise = new Date(res.sys.sunrise*1000);
           var sunset = new Date(res.sys.sunset*1000);
+          function dateHelper(i) {
+            return i<10 ? "0" + i : i;
+          }
+          function getTempLevel(temp, isImperial) {
+            if (isImperial) { temp = (temp-32)*(5/9) }
+            var level = Math.round((temp + 8) / 8);
+            level = level < 0 ? 0 : level;
+            level = level > 6 ? 6 : level;
+            return level
+          }
           this.data = {
             icon: this.iconMapping[res.weather[0].icon],
             name: res.name,
-            sunrise: sunrise.getHours() + ":" + sunrise.getMinutes(),
-            sunset: sunset.getHours() + ":" + sunset.getMinutes(),
+            sunrise: dateHelper(sunrise.getHours()) + ":" + dateHelper(sunrise.getMinutes()),
+            sunset: dateHelper(sunset.getHours()) + ":" + dateHelper(sunset.getMinutes()),
             currentTemp: Math.round(res.main.temp),
             minTemp: Math.round(res.main.temp_min),
             maxTemp: Math.round(res.main.temp_max),
             windSpeed: res.wind.speed,
             windDirection: this.windDirections[Math.round(res.wind.deg / 45) % 8],
             humidity: res.main.humidity,
-            pressure: res.main.pressure
+            pressure: res.main.pressure,
+            tempLevel: getTempLevel(res.main.temp, this.imperial)
           }
           this.fire('current-weather-load', {weather: this.data});
         }.bind(this));
