@@ -48,6 +48,7 @@ Attribute     | Options     | Default      | Description
 `wind`        | *boolean*   | `false'      | show wind information
 `suntimes`    | *boolean*   | `false'      | show sunrise und sunset times
 `hump`        | *boolean*   | `false'      | show humidity and pressure
+`name`        | *boolean*   | `false'      | show the name of the requested location, e.g. Paris
 
 
 

@@ -15,22 +15,41 @@
     <link rel="import" href="src/current-weather.html">
 
     <style>
-      body {
-        background-color: #001F3F;
-      }
       current-weather {
-        max-width: 320px;
-        margin: auto;
+        width: 320px;
+        margin: 0 10px 10px 0;
         color: white;
         font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         font-weight: 300;
+        display: inline-block;
       }
       .weather {
-        max-width: 320px;
         text-align: center;
+        padding: 20px 0;
       }
       .weather > div {
         margin-bottom: 1em;
+      }
+      .temp-level-0 {
+        background-color: #001f3f;
+      }
+      .temp-level-1 {
+        background-color: #0074d9;
+      }
+      .temp-level-2 {
+        background-color: #00ABA9;
+      }
+      .temp-level-3 {
+        background-color: #3D9970;
+      }
+      .temp-level-4 {
+        background-color: #ff851b;
+      }
+      .temp-level-5 {
+        background-color: #ff4136;
+      }
+      .temp-level-6 {
+        background-color: #85144b;
       }
       .weather .info {
         margin-bottom: 4rem;
