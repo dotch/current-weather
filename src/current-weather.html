@@ -5,36 +5,7 @@
 <polymer-element name="current-weather"  attributes="lat lon units">
   <template>
     <style>
-      :host {
-        text-align: center;
-        font-size: 1rem;
-      }
-      .weather {
-        width: 100%;
-        height: 100%;
-      }
-      .location {
-        margin-bottom: 2rem;
-      }
-      .location > span {
-        font-size: 1.5rem;
-      }
-      .weather-icon > i {
-        font-size: 8rem;
-        line-height: 8rem;
-      }
-      .temperatures {
-        margin-bottom: 1rem;
-      }
-      .current {
-        font-size: 4rem;
-      }
-      .max {
-        margin-left: 1rem;
-      }
-      .wind {
-        margin-bottom: 1rem;
-      }
+
     </style>
     <core-ajax id="ajax" auto
       url="http://api.openweathermap.org/data/2.5/weather"
@@ -48,29 +19,48 @@
     </core-ajax>
     <template if="{{data}}">
       <div class="weather">
-        <div class="location">
-          <span>{{data.name}}</span>
+        <div class="info">
+          {{data.name}}
         </div>   
         <div class="weather-icon">
           <i class="{{data.icon}}"></i>
         </div>
         <div class="temperatures">
-          <div class="current">{{data.currentTemp}}°</div>
+          <div class="current">
+            {{data.currentTemp}}°
+          </div>
           <div class="minmax">
-            <span class="min">
-              <i class="wi-up"></i> {{data.maxTemp}}° 
-            </span>
-            <span class="max">
-              <i class="wi-down"></i> {{data.minTemp}}°
-            </span> 
+            <div class="min">
+              <i class="wi-up"></i> {{data.minTemp}}° 
+            </div>
+            <div class="max">
+              <i class="wi-down"></i> {{data.maxTemp}}°
+            </div> 
           </div>
         </div>
         <div class="wind">
-          <i class="wi-strong-wind"></i> {{data.wind}} {{speedUnit}}<br>   
+          <div class="speed">
+            <i class="wi-strong-wind"></i> {{data.windSpeed}} {{speedUnit}}
+          </div>
+          <div class="direction">
+            <i class="wi-wind-north-east"></i> {{data.windDirection}}
+          </div>
         </div>
         <div class="sun">
-          <i class="wi-sunrise"></i> {{data.sunrise}} <br>
-          <i class="wi-sunset"></i> {{data.sunset}} <br>
+          <div class="sunrise">
+            <i class="wi-sunrise"></i> {{data.sunrise}}
+          </div>
+          <div class="sunset">
+            <i class="wi-sunset"></i> {{data.sunset}} 
+          </div>
+        </div>
+        <div class="preshum">
+          <div class="humidity">
+            <i class="wi-sprinkles"></i> {{data.humidity}}%
+          </div>
+          <div class="pressure">
+            <i class="wi-thermometer-internal"></i> {{data.pressure}} hPa
+          </div>
         </div>
       </div>      
     </template>
@@ -100,6 +90,7 @@
         "50d": "wi-fog",
         "50n": "wi-fog"
       },
+      windDirections: ["N","NE","E","SE","S","SW","W","NW"],
       data: null,
       ready: function() {
         console.log(this.data);
@@ -119,7 +110,10 @@
             currentTemp: Math.round(res.main.temp),
             minTemp: Math.round(res.main.temp_min),
             maxTemp: Math.round(res.main.temp_max),
-            wind: res.wind.speed
+            windSpeed: res.wind.speed,
+            windDirection: this.windDirections[Math.round(res.wind.deg / 45) % 8],
+            humidity: res.main.humidity,
+            pressure: res.main.pressure
           }
         }.bind(this));
       }
