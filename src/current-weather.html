@@ -2,7 +2,7 @@
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 <link rel="stylesheet" href="../bower_components/weather-icons/css/weather-icons.css">
 
-<polymer-element name="current-weather"  attributes="lat lon units">
+<polymer-element name="current-weather"  attributes="lat lon imperial wind suntimes hump">
   <template>
     <style>
 
@@ -12,16 +12,16 @@
       params='{
         "lat": {{lat}},
         "lon": {{lon}},
-        "units": "{{units}}" 
+        "units": "{{units}}"
       }'
       handleAs="json"
-    > 
+    >
     </core-ajax>
     <template if="{{data}}">
       <div class="weather">
         <div class="info">
           {{data.name}}
-        </div>   
+        </div>
         <div class="weather-icon">
           <i class="{{data.icon}}"></i>
         </div>
@@ -31,42 +31,52 @@
           </div>
           <div class="minmax">
             <div class="min">
-              <i class="wi-down"></i> {{data.minTemp}}° 
+              <i class="wi-down"></i> {{data.minTemp}}°
             </div>
             <div class="max">
               <i class="wi-up"></i> {{data.maxTemp}}°
-            </div> 
+            </div>
           </div>
         </div>
-        <div class="wind">
-          <div class="speed">
-            <i class="wi-strong-wind"></i> {{data.windSpeed}} {{speedUnit}}
+        <template if="{{wind}}">
+          <div class="wind">
+            <div class="speed">
+              <i class="wi-strong-wind"></i> {{data.windSpeed}} {{speedUnit}}
+            </div>
+            <div class="direction">
+              <i class="wi-wind-north-east"></i> {{data.windDirection}}
+            </div>
           </div>
-          <div class="direction">
-            <i class="wi-wind-north-east"></i> {{data.windDirection}}
+        </template>
+        <template if="{{suntimes}}">
+          <div class="sun">
+            <div class="sunrise">
+              <i class="wi-sunrise"></i> {{data.sunrise}}
+            </div>
+            <div class="sunset">
+              <i class="wi-sunset"></i> {{data.sunset}}
+            </div>
           </div>
-        </div>
-        <div class="sun">
-          <div class="sunrise">
-            <i class="wi-sunrise"></i> {{data.sunrise}}
+        </template>
+        <template if="{{hump}}">
+          <div class="hump">
+            <div class="humidity">
+              <i class="wi-sprinkles"></i> {{data.humidity}}%
+            </div>
+            <div class="pressure">
+              <i class="wi-thermometer-internal"></i> {{data.pressure}} hPa
+            </div>
           </div>
-          <div class="sunset">
-            <i class="wi-sunset"></i> {{data.sunset}} 
-          </div>
-        </div>
-        <div class="preshum">
-          <div class="humidity">
-            <i class="wi-sprinkles"></i> {{data.humidity}}%
-          </div>
-          <div class="pressure">
-            <i class="wi-thermometer-internal"></i> {{data.pressure}} hPa
-          </div>
-        </div>
-      </div>      
+        </template>
+      </div>
     </template>
   </template>
   <script>
     Polymer('current-weather', {
+      imperial: false,
+      wind: false,
+      suntimes: false,
+      hump: false,
       units: "metric",
       temperatureUnit:  "C",
       speedUnit: "km/h",
@@ -93,8 +103,9 @@
       windDirections: ["N","NE","E","SE","S","SW","W","NW"],
       data: null,
       ready: function() {
-        console.log(this.data);
-        if (this.units === "imperial") {
+
+        if (this.imperial) {
+          this.units = "imperial"
           this.temperatureUnit = "F";
           this.speedUnit = "mp/h";
         };
@@ -115,7 +126,7 @@
             humidity: res.main.humidity,
             pressure: res.main.pressure
           }
-          this.fire('current-weather-load', {weather: data});
+          this.fire('current-weather-load', {weather: this.data});
         }.bind(this));
       }
     });
