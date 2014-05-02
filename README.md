@@ -34,7 +34,7 @@ Or [download as ZIP](https://github.com/dotch/current-weather/archive/master.zip
 3. Start using it!
 
     ```html
-    <current-weather lat="37.3860500" lon="-122.0838500" units="imperical"></current-weather>
+    <current-weather lat="37.3860500" lon="-122.0838500" units="imperial"></current-weather>
     <current-weather lat="49.27826" lon="11.45929" units="metric"></current-weather>
     ```
 
