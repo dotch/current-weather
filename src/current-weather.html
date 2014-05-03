@@ -2,7 +2,7 @@
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
 <link rel="stylesheet" href="../bower_components/weather-icons/css/weather-icons.css">
 
-<polymer-element name="current-weather"  attributes="lat lon name imperial wind suntimes hump">
+<polymer-element name="current-weather"  attributes="lat lon name conditiontext imperial wind suntimes minmax chump language">
   <template>
     <style>
 
@@ -12,7 +12,8 @@
       params='{
         "lat": {{lat}},
         "lon": {{lon}},
-        "units": "{{units}}"
+        "units": "{{units}}",
+        "lang": "{{language}}"
       }'
       handleAs="json"
     >
@@ -24,21 +25,26 @@
             {{data.name}}
           </div>
         </template>
-        <div class="weather-icon">
-          <i class="{{data.icon}}"></i>
+        <div class="weather-condition">
+          <div class="condition-icon"><i class="{{data.icon}}"></i></div>
+          <template if="{{conditiontext}}">
+            <div class="conditiontext">{{data.conditiontext}}</div>
+          </template>
         </div>
         <div class="temperatures">
           <div class="current">
             {{data.currentTemp}}°
           </div>
-          <div class="minmax">
-            <div class="min">
-              <i class="wi-down"></i> {{data.minTemp}}°
+          <template if="minmax">
+            <div class="minmax">
+              <div class="min">
+                <i class="wi-down"></i> {{data.minTemp}}°
+              </div>
+              <div class="max">
+                <i class="wi-up"></i> {{data.maxTemp}}°
+              </div>
             </div>
-            <div class="max">
-              <i class="wi-up"></i> {{data.maxTemp}}°
-            </div>
-          </div>
+          </template>
         </div>
         <template if="{{wind}}">
           <div class="wind">
@@ -60,8 +66,11 @@
             </div>
           </div>
         </template>
-        <template if="{{hump}}">
-          <div class="hump">
+        <template if="{{chump}}">
+          <div class="chump">
+            <div class="cloudiness">
+              <i class="wi-cloudy"></i> {{data.cloudiness}}%
+            </div>
             <div class="humidity">
               <i class="wi-sprinkles"></i> {{data.humidity}}%
             </div>
@@ -75,11 +84,14 @@
   </template>
   <script>
     Polymer('current-weather', {
+      language: "en",
       name: false,
       imperial: false,
+      conditiontext: true,
       wind: false,
       suntimes: false,
-      hump: false,
+      chump: false,
+      conditiontext: false,
       units: "metric",
       temperatureUnit:  "C",
       speedUnit: "km/h",
@@ -128,6 +140,7 @@
           }
           this.data = {
             icon: this.iconMapping[res.weather[0].icon],
+            conditiontext: res.weather[0].description,
             name: res.name,
             sunrise: dateHelper(sunrise.getHours()) + ":" + dateHelper(sunrise.getMinutes()),
             sunset: dateHelper(sunset.getHours()) + ":" + dateHelper(sunset.getMinutes()),
@@ -136,10 +149,12 @@
             maxTemp: Math.round(res.main.temp_max),
             windSpeed: res.wind.speed,
             windDirection: this.windDirections[Math.round(res.wind.deg / 45) % 8],
+            cloudiness: res.clouds.all,
             humidity: res.main.humidity,
             pressure: res.main.pressure,
             tempLevel: getTempLevel(res.main.temp, this.imperial)
           }
+          console.log(this.data);
           this.fire('current-weather-load', {weather: this.data});
         }.bind(this));
       }
