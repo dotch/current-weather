@@ -13,67 +13,14 @@
 
     <!-- Importing Custom Elements -->
     <link rel="import" href="src/current-weather.html">
-
     <style>
-      current-weather {
-        width: 320px;
-        margin: 0 10px 10px 0;
-        color: white;
-        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-        font-weight: 300;
-        display: inline-block;
-      }
-      .weather {
-        text-align: center;
-        padding: 1.5em 0 1em 0;
-      }
-      .weather > div {
-        margin-bottom: 1em;
-      }
-      .temp-level-0 {
-        background-color: #001f3f;
-      }
-      .temp-level-1 {
-        background-color: #0074d9;
-      }
-      .temp-level-2 {
-        background-color: #00ABA9;
-      }
-      .temp-level-3 {
-        background-color: #3D9970;
-      }
-      .temp-level-4 {
-        background-color: #ff851b;
-      }
-      .temp-level-5 {
-        background-color: #ff4136;
-      }
-      .temp-level-6 {
-        background-color: #85144b;
-      }
-      .weather .info {
-        margin-bottom: 4rem;
-        font-size: 1.5rem;
-      }
-      .condition-icon > i {
-        font-size: 8rem;
-        line-height: 8rem;
-      }
-      .current {
-        font-size: 4rem;
-      }
-      .min, .max {
-        display: inline-block;
-      }
-      .max {
-        margin-left: .5em;
-      }
+
     </style>
 </head>
 <body>
 
     <!-- Using Custom Elements -->
-    <current-weather lat="37.3860500" lon="-122.0838500" name conditiontext imperial wind chump suntimes ></current-weather>
+    <current-weather lat="37.3860500" lon="-122.0838500" name conditiontext metric wind chump suntimes ></current-weather>
 
 </body>
 </html>

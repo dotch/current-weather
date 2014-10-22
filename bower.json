@@ -1,24 +1,24 @@
 {
-    "name": "current-weather",
-    "version": "0.2.7",
-    "description": "A polymer element for showing the current weather",
-    "license": "MIT",
-    "main": "dist/current-weather.html",
-    "keywords": [
-        "polymer",
-        "web-components",
-        "web-component",
-        "weather",
-        "open-weather-maps"
-    ],
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components"
-    ],
-    "dependencies": {
-        "polymer": "Polymer/polymer#~0.2.3",
-        "core-ajax": "Polymer/core-ajax#~0.2.3",
-        "weather-icons": "weather-icons#master"
-    }
+  "name": "current-weather",
+  "version": "0.2.7",
+  "description": "A polymer element for showing the current weather",
+  "license": "MIT",
+  "main": "dist/current-weather.html",
+  "keywords": [
+    "polymer",
+    "web-components",
+    "web-component",
+    "weather",
+    "open-weather-maps"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "polymer": "~0.4.2",
+    "core-ajax": "polymer/core-ajax#~0.4.2",
+    "weather-icons": "~1.2.1"
+  }
 }
