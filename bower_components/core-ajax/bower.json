@@ -2,7 +2,9 @@
   "name": "core-ajax",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#0.2.3"
+    "polymer": "Polymer/polymer#^0.4.0"
   },
-  "version": "0.2.3"
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools#master"
+  }
 }
