@@ -44,14 +44,14 @@ Attribute       | Options     | Default      | Description
 ---             | ---         | ---          | ---
 `lat`           | *double*    | ``           | The latitude of the desired location
 `long`          | *double*    | ``           | The longitude of the desired location
-`imperial`      | *boolean*   | `false'      | use imperial instead of metric units
-`wind`          | *boolean*   | `false'      | show wind information
-`suntimes`      | *boolean*   | `false'      | show sunrise und sunset times
-`minmax`        | *boolean*   | `false'      | show min and max temperature, use with care, it seems to be not the daily min and max-temp
-`chump`         | *boolean*   | `false'      | show cloudiness humidity and pressure
-`name`          | *boolean*   | `false'      | show the name of the requested location, e.g. Paris
-`conditiontext` | *boolean*   | `false'      | show the weathercondition in text form e.g. "clouded"
-`language`      | *string*    | `en'         | specify the language for the conditiontext e.g. "de", possible values: en, ru, it, sp, ua, de, pt, ro, pl, fi, nl, fr, bg, se, zh_tw, zh_cn, tr
+`imperial`      | *boolean*   | `false`      | use imperial instead of metric units
+`wind`          | *boolean*   | `false`      | show wind information
+`suntimes`      | *boolean*   | `false`      | show sunrise und sunset times
+`minmax`        | *boolean*   | `false`      | show min and max temperature, use with care, it seems to be not the daily min and max-temp
+`chump`         | *boolean*   | `false`      | show cloudiness humidity and pressure
+`name`          | *boolean*   | `false`      | show the name of the requested location, e.g. Paris
+`conditiontext` | *boolean*   | `false`      | show the weathercondition in text form e.g. "clouded"
+`language`      | *string*    | `en`         | specify the language for the conditiontext e.g. "de", possible values: en, ru, it, sp, ua, de, pt, ro, pl, fi, nl, fr, bg, se, zh_tw, zh_cn, tr
 
 
 
