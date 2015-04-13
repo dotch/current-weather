@@ -1,6 +1,6 @@
 {
   "name": "current-weather",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A polymer element for showing the current weather",
   "license": "MIT",
   "main": "dist/current-weather.html",
@@ -17,8 +17,8 @@
     "bower_components"
   ],
   "dependencies": {
-    "polymer": "~0.4.2",
-    "core-ajax": "polymer/core-ajax#~0.4.2",
-    "weather-icons": "~1.2.1"
+    "polymer": "Polymer/polymer#^0.5.5",
+    "core-ajax": "Polymer/core-ajax#^0.5.5",
+    "weather-icons": "~1.3.2"
   }
 }
