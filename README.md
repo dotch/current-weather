@@ -44,6 +44,7 @@ Attribute       | Options     | Default      | Description
 ---             | ---         | ---          | ---
 `lat`           | *double*    | ``           | The latitude of the desired location
 `long`          | *double*    | ``           | The longitude of the desired location
+`app-id`        | *string*    | ``           | Open weather map app id
 `imperial`      | *boolean*   | `false`      | use imperial instead of metric units
 `wind`          | *boolean*   | `false`      | show wind information
 `suntimes`      | *boolean*   | `false`      | show sunrise und sunset times
@@ -88,13 +89,7 @@ In order to run it locally you'll need to fetch some dependencies and a basic se
     ```sh
     $ grunt build
     ```
-
-* To provide a live demo, send everything to `gh-pages` branch.
-
-    ```sh
-    $ grunt deploy
-    ```
-
+    
 ## Contributing
 
 1. Fork it!
