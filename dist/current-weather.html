@@ -75,7 +75,7 @@
     </style>
     <iron-ajax id="ajax" auto
                url="http://api.openweathermap.org/data/2.5/weather"
-               params="[[_weatherApiParams(lat, lon, units, language)]]"
+               params="[[_weatherApiParams(lat, lon, units, language, appId)]]"
                handleAs="json"
                on-response="_weatherApiResponse">
     </iron-ajax>
@@ -149,6 +149,7 @@
       properties: {
         lat: {},
         lon: {},
+        appId: {},
         name: {type: Boolean, value: false},
         conditiontext: {type: Boolean, value: false},
         imperial: {type: Boolean, value: false},
@@ -186,8 +187,8 @@
       _weatherClass: function(tempLevel) {
         return 'weather temp-level-' + tempLevel;
       },
-      _weatherApiParams: function(lat, lon, units, language) {
-        return {lat: lat, lon: lon, units: units, lang: language};
+      _weatherApiParams: function(lat, lon, units, language, appId) {
+        return {lat: lat, lon: lon, units: units, lang: language, appId: appId};
       },
       _weatherApiResponse: function(e) {
         var res = e.detail.response;
