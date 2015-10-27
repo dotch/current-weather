@@ -54,7 +54,9 @@ Attribute       | Options     | Default      | Description
 `conditiontext` | *boolean*   | `false`      | show the weathercondition in text form e.g. "clouded"
 `language`      | *string*    | `en`         | specify the language for the conditiontext e.g. "de", possible values: en, ru, it, sp, ua, de, pt, ro, pl, fi, nl, fr, bg, se, zh_tw, zh_cn, tr
 
+Note:
 
+If `lat` and `lon` are not provided, it will use the geolocation of your browser.
 
 ## Events
 
@@ -89,7 +91,7 @@ In order to run it locally you'll need to fetch some dependencies and a basic se
     ```sh
     $ grunt build
     ```
-    
+
 ## Contributing
 
 1. Fork it!
