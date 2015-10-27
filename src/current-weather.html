@@ -227,13 +227,13 @@
         };
         this.fire('current-weather-load', {weather: this.data});
       },
-      showLocation: function(position) {
+      getCurrentLocation: function(position) {
 	  this.lat = position.coords.latitude;
 	  this.lon = position.coords.longitude;
       },
       ready: function() {
 	  if (typeof(this.lat) == "undefined" && typeof(this.lon) == "undefined") {
-	      navigator.geolocation.getCurrentPosition(this.showLocation.bind(this));
+	      navigator.geolocation.getCurrentPosition(this.getCurrentLocation.bind(this));
 	  }
       }
     });
